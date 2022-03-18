@@ -1,28 +1,28 @@
-# ³ëµå Å¬·¡½º.
-# »ı¼ºÀÚ·Î µ¥ÀÌÅÍ¿Í Æ÷ÀÎÅÍ¸¦ ¹Ş´Â´Ù.
-# Æ÷ÀÎÅÍ°¡ ÀÔ·ÂÀÌ ¾ÈµÈ °æ¿ì, ÇØ´ç ³ëµå°¡ Á¾´ÜÁ¡ÀÌ¶ó´Â ÀÇ¹Ì.
+# ë…¸ë“œ í´ë˜ìŠ¤.
+# ìƒì„±ìë¡œ ë°ì´í„°ì™€ í¬ì¸í„°ë¥¼ ë°›ëŠ”ë‹¤.
+# í¬ì¸í„°ê°€ ì…ë ¥ì´ ì•ˆëœ ê²½ìš°, í•´ë‹¹ ë…¸ë“œê°€ ì¢…ë‹¨ì ì´ë¼ëŠ” ì˜ë¯¸.
 class Node:
     def __init__(self, data, left_pointer=None, right_pointer=None):
         self.left_pointer = left_pointer
         self.data = data
         self.right_pointer = right_pointer
 
-# ¸µÅ©µå¸®½ºÆ® Å¬·¡½º.
-# Å¬·¡½º °´Ã¼ »ı¼º½Ã µ¥ÀÌÅÍ°¡ Á¸ÀçÇÏÁö ¾Ê´Â ³ëµå¸¦ »ı¼ºÇÑ´Ù.
-# ÇØ´ç ³ëµåÀÇ Æ÷ÀÎÅÍ°¡ ¹Ù·Î Head.
-class LinkedList(object):
+# ë§í¬ë“œë¦¬ìŠ¤íŠ¸ í´ë˜ìŠ¤.
+# í´ë˜ìŠ¤ ê°ì²´ ìƒì„±ì‹œ ë°ì´í„°ê°€ ì¡´ì¬í•˜ì§€ ì•ŠëŠ” ë…¸ë“œë¥¼ ìƒì„±í•œë‹¤.
+# í•´ë‹¹ ë…¸ë“œì˜ í¬ì¸í„°ê°€ ë°”ë¡œ Head.
+class DoublyLinkedList(object):
     def __init__(self):
         self.head = Node(None)
-        # ¸µÅ©µå¸®½ºÆ®ÀÇ ³ëµå °³¼ö¸¦ ÀúÀåÇÏ´Â º¯¼ö size.
+        # ë§í¬ë“œë¦¬ìŠ¤íŠ¸ì˜ ë…¸ë“œ ê°œìˆ˜ë¥¼ ì €ì¥í•˜ëŠ” ë³€ìˆ˜ size.
         self.size = 0
 
-    # idx À§Ä¡¿¡ Á¸ÀçÇÏ´Â ³ëµå¸¦ ¹Ş¾Æ¿Â´Ù.
+    # idx ìœ„ì¹˜ì— ì¡´ì¬í•˜ëŠ” ë…¸ë“œë¥¼ ë°›ì•„ì˜¨ë‹¤.
     def get(self, idx):
-        # ÀÔ·ÂµÈ ÀÎµ¦½º°¡ ¸µÅ©µå¸®½ºÆ® »çÀÌÁîº¸´Ù Å¬ °æ¿ì, ¿À·ù°¡ ¹ß»ı.
+        # ì…ë ¥ëœ ì¸ë±ìŠ¤ê°€ ë§í¬ë“œë¦¬ìŠ¤íŠ¸ ì‚¬ì´ì¦ˆë³´ë‹¤ í´ ê²½ìš°, ì˜¤ë¥˜ê°€ ë°œìƒ.
         if idx >= self.size:
             print("Index Error")
             return None
-        # ÀÎµ¦½º°¡ 0ÀÎ °æ¿ì, Çìµå¸¦ ¹Ş¾Æ¿À¶ó´Â ÀÇ¹Ì
+        # ì¸ë±ìŠ¤ê°€ 0ì¸ ê²½ìš°, í—¤ë“œë¥¼ ë°›ì•„ì˜¤ë¼ëŠ” ì˜ë¯¸
         if idx == 0:
             return self.head
         else:
@@ -31,14 +31,14 @@ class LinkedList(object):
                 node = node.right_pointer
             return node
 
-    # µ¥ÀÌÅÍ¸¦ ¸µÅ©µå¸®½ºÆ® Á¾´ÜÁ¡À¸·Î Ãß°¡ÇÑ´Ù.
+    # ë°ì´í„°ë¥¼ ë§í¬ë“œë¦¬ìŠ¤íŠ¸ ì¢…ë‹¨ì ìœ¼ë¡œ ì¶”ê°€í•œë‹¤.
     def append(self, data):
         if self.size == 0:
             self.head = Node(data)
             self.size += 1
         else:
             node = self.head
-            # Á¾´ÜÁ¡ÀÇ Æ÷ÀÎÅÍ´Â None°ªÀ» °¡Áü.
+            # ì¢…ë‹¨ì ì˜ í¬ì¸í„°ëŠ” Noneê°’ì„ ê°€ì§.
             while node.right_pointer != None:
                 node = node.right_pointer
 
@@ -47,17 +47,26 @@ class LinkedList(object):
             new_node.left_pointer = node
             self.size += 1
 
-    # µ¥ÀÌÅÍ¸¦ idx À§Ä¡¿¡ Ãß°¡ÇÑ´Ù.
+    # ë°ì´í„°ë¥¼ idx ìœ„ì¹˜ì— ì¶”ê°€í•œë‹¤.
     def insert(self, value, idx):
         if self.size == 0:
             self.head = Node(value)
             self.size += 1
-        # idx°¡ 0ÀÌ¶ó´Â°Ç, Head ÀÚ¸®¿¡ »õ·Î¿î µ¥ÀÌÅÍ¸¦ ³Ö´Â´Ù´Â ÀÇ¹Ì.
+        # idxê°€ 0ì´ë¼ëŠ”ê±´, Head ìë¦¬ì— ìƒˆë¡œìš´ ë°ì´í„°ë¥¼ ë„£ëŠ”ë‹¤ëŠ” ì˜ë¯¸.
         elif idx == 0:
-            ############# ¼öÁ¤ ÇÊ¿ä
             new_node = Node(value)
-            self.head.right_pointer
-            self.head = Node(value, self.head)
+            self.head.left_pointer = new_node
+            new_node.right_pointer = self.head
+            self.head = new_node
+            self.size += 1
+        elif idx == self.size:
+            node = self.get(idx - 1)
+            if node == None:
+                return
+
+            new_node = Node(value)
+            new_node.left_pointer = node
+            node.right_pointer = new_node
             self.size += 1
         else:
             node = self.get(idx - 1)
@@ -66,14 +75,16 @@ class LinkedList(object):
 
             new_node = Node(value)
 
-            next_node = node.pointer
-            # »ğÀÔÇÏ·Á´Â idx ÀÌÀüÀÇ ³ëµåÀÇ Æ÷ÀÎÅÍ¸¦ »õ·Î¿î ³ëµå·Î ¼³Á¤
-            node.pointer = new_node
-            # ÇöÀç ³ëµåÀÇ Æ÷ÀÎÅÍ¸¦ »ğÀÔÇÏ·Á´Â idx ÀÌÈÄÀÇ ³ëµå·Î ¼³Á¤
-            new_node.pointer = next_node
+            next_node = node.right_pointer
+            # ì‚½ì…í•˜ë ¤ëŠ” idx ì´ì „ì˜ ë…¸ë“œì˜ í¬ì¸í„°ë¥¼ ìƒˆë¡œìš´ ë…¸ë“œë¡œ ì„¤ì •
+            node.right_pointer = new_node
+            new_node.left_pointer = node
+            # í˜„ì¬ ë…¸ë“œì˜ í¬ì¸í„°ë¥¼ ì‚½ì…í•˜ë ¤ëŠ” idx ì´í›„ì˜ ë…¸ë“œë¡œ ì„¤ì •
+            new_node.right_pointer = next_node
+            next_node.left_pointer = new_node
             self.size += 1
 
-    # idx À§Ä¡ÀÇ ³ëµå¸¦ »èÁ¦ÇÑ´Ù.
+    # idx ìœ„ì¹˜ì˜ ë…¸ë“œë¥¼ ì‚­ì œí•œë‹¤.
     def delete(self, idx):
         if self.size == 0:
             print("Empty Linked List")
@@ -82,36 +93,104 @@ class LinkedList(object):
             print("Index Error")
             return
         elif idx == 0:
-            self.head = self.head.pointer
+            if self.size == 1:
+                self.head = Node(None)
+            else:
+                next_node = self.head.right_pointer
+                next_node.left_pointer = None
+                self.head = next_node
+            self.size -= 1
+        elif (idx + 1) == self.size:
+            node = self.get(idx - 1)
+
+            node.right_pointer = node.right_pointer.right_pointer
             self.size -= 1
         else:
             node = self.get(idx - 1)
-            node.pointer = node.pointer.pointer
+
+            node.right_pointer.right_pointer.left_pointer = node
+            node.right_pointer = node.right_pointer.right_pointer
             self.size -= 1
+
+    def get_size(self):
+        return self.size
 
     def print_linked_list(self):
         node = self.head
         while node:
-            if node.pointer != None:
+            if node.right_pointer != None:
                 print(node.data, "-> ", end="")
-                node = node.pointer
+                node = node.right_pointer
             else:
                 print(node.data)
-                node = node.pointer
+                node = node.right_pointer
+    
+    def print_reverse_linked_list(self):
+        node = self.head
+        while node.right_pointer != None:
+            node = node.right_pointer
+        
+        while node:
+            if node.left_pointer != None:
+                print(node.data, "-> ", end="")
+                node = node.left_pointer
+            else:
+                print(node.data)
+                node = node.left_pointer
 
-LL = LinkedList()
-LL.append("Data1")
-LL.print_linked_list()
-LL.append("Data2")
-LL.print_linked_list()
-LL.append("Data3")
-LL.print_linked_list()
-LL.insert("Data4", 1)
-LL.print_linked_list()
+# Doubly Linked List ìƒì„±
+DLL = DoublyLinkedList()
 
-LL.delete(0)
-LL.print_linked_list()
-LL.delete(2)
-LL.print_linked_list()
-LL.delete(0)
-LL.print_linked_list()
+while(1):
+    command = input("ëª…ë ¹ì–´ë¥¼ ì…ë ¥í•˜ì„¸ìš”(ë„ì›€ë§: help ì…ë ¥): ")
+
+    if command == 'help':
+        print(" \
+            append: Nê°œì˜ ë°ì´í„° í•œ ë²ˆì— ì¶”ê°€\n \
+            insert: íŠ¹ì • ìœ„ì¹˜ì— ë°ì´í„° ì¶”ê°€\n \
+            delete: íŠ¹ì • ìœ„ì¹˜ì˜ ë°ì´í„° ì‚­ì œ\n \
+            delete_all: ë°ì´í„° ì „ë¶€ ì‚­ì œ\n \
+            print: DLLì— ìˆëŠ” ë°ì´í„° ì¶œë ¥\n \
+            print_rev: DLLì— ìˆëŠ” ë°ì´í„° ì—­ìˆœìœ¼ë¡œ ì¶œë ¥\n \
+            exit: í”„ë¡œê·¸ë¨ ì¢…ë£Œ\n \
+        ")
+
+    elif command == 'append':
+        # Data ìˆ˜ ì…ë ¥
+        data_num = int(input("ì¶”ê°€í•  ë°ì´í„°ì˜ ì–‘ì„ ì…ë ¥í•˜ì„¸ìš”: "))
+
+        # Data ìë™ ìƒì„±
+        data_list = []
+        for idx in range(1, data_num+1):
+            data = f'Data{idx}'
+            data_list.append(data)
+
+        # DLLì— data ì…ë ¥
+        for idx in range(data_num):
+            DLL.append(data_list[idx])
+
+    elif command == 'insert':
+        position, value = input("ì¶”ê°€í•  ë°ì´í„°ì˜ ìœ„ì¹˜ì™€ ê°’ì„ ì…ë ¥í•˜ì„¸ìš”: ").split()
+        DLL.insert(value, int(position))
+
+    elif command == 'delete':
+        position = int(input("ì‚­ì œí•  ë°ì´í„°ì˜ ìœ„ì¹˜ë¥¼ ì…ë ¥í•˜ì„¸ìš”: "))
+        DLL.delete(position)
+
+    elif command == 'delete_all':
+        cur_size = DLL.get_size()
+        for idx in range(cur_size):
+            DLL.delete(0)
+
+    elif command == 'print':
+        DLL.print_linked_list()
+
+    elif command == 'print_rev':
+        DLL.print_reverse_linked_list()
+
+    elif command == 'exit':
+        break
+
+    else:
+        print("No such command!!!")
+        print("Use 'help' to check command")
