@@ -1,28 +1,28 @@
-# 노드 클래스.
-# 생성자로 데이터와 포인터를 받는다.
-# 포인터가 입력이 안된 경우, 해당 노드가 종단점이라는 의미.
+# �끂�뱶 �겢�옒�뒪.
+# �깮�꽦�옄濡� �뜲�씠�꽣��� �룷�씤�꽣瑜� 諛쏅뒗�떎.
+# �룷�씤�꽣媛� �엯�젰�씠 �븞�맂 寃쎌슦, �빐�떦 �끂�뱶媛� 醫낅떒�젏�씠�씪�뒗 �쓽誘�.
 class Node:
     def __init__(self, data, left_pointer=None, right_pointer=None):
         self.left_pointer = left_pointer
         self.data = data
         self.right_pointer = right_pointer
 
-# 링크드리스트 클래스.
-# 클래스 객체 생성시 데이터가 존재하지 않는 노드를 생성한다.
-# 해당 노드의 포인터가 바로 Head.
+# 留곹겕�뱶由ъ뒪�듃 �겢�옒�뒪.
+# �겢�옒�뒪 媛앹껜 �깮�꽦�떆 �뜲�씠�꽣媛� 議댁옱�븯吏� �븡�뒗 �끂�뱶瑜� �깮�꽦�븳�떎.
+# �빐�떦 �끂�뱶�쓽 �룷�씤�꽣媛� 諛붾줈 Head.
 class DoublyLinkedList(object):
     def __init__(self):
         self.head = Node(None)
-        # 링크드리스트의 노드 개수를 저장하는 변수 size.
+        # 留곹겕�뱶由ъ뒪�듃�쓽 �끂�뱶 媛쒖닔瑜� ����옣�븯�뒗 蹂��닔 size.
         self.size = 0
 
-    # idx 위치에 존재하는 노드를 받아온다.
+    # idx �쐞移섏뿉 議댁옱�븯�뒗 �끂�뱶瑜� 諛쏆븘�삩�떎.
     def get(self, idx):
-        # 입력된 인덱스가 링크드리스트 사이즈보다 클 경우, 오류가 발생.
+        # �엯�젰�맂 �씤�뜳�뒪媛� 留곹겕�뱶由ъ뒪�듃 �궗�씠利덈낫�떎 �겢 寃쎌슦, �삤瑜섍�� 諛쒖깮.
         if idx >= self.size:
             print("Index Error")
             return None
-        # 인덱스가 0인 경우, 헤드를 받아오라는 의미
+        # �씤�뜳�뒪媛� 0�씤 寃쎌슦, �뿤�뱶瑜� 諛쏆븘�삤�씪�뒗 �쓽誘�
         if idx == 0:
             return self.head
         else:
@@ -31,14 +31,14 @@ class DoublyLinkedList(object):
                 node = node.right_pointer
             return node
 
-    # 데이터를 링크드리스트 종단점으로 추가한다.
+    # �뜲�씠�꽣瑜� 留곹겕�뱶由ъ뒪�듃 醫낅떒�젏�쑝濡� 異붽���븳�떎.
     def append(self, data):
         if self.size == 0:
             self.head = Node(data)
             self.size += 1
         else:
             node = self.head
-            # 종단점의 포인터는 None값을 가짐.
+            # 醫낅떒�젏�쓽 �룷�씤�꽣�뒗 None媛믪쓣 媛�吏�.
             while node.right_pointer != None:
                 node = node.right_pointer
 
@@ -47,12 +47,12 @@ class DoublyLinkedList(object):
             new_node.left_pointer = node
             self.size += 1
 
-    # 데이터를 idx 위치에 추가한다.
+    # �뜲�씠�꽣瑜� idx �쐞移섏뿉 異붽���븳�떎.
     def insert(self, value, idx):
         if self.size == 0:
             self.head = Node(value)
             self.size += 1
-        # idx가 0이라는건, Head 자리에 새로운 데이터를 넣는다는 의미.
+        # idx媛� 0�씠�씪�뒗嫄�, Head �옄由ъ뿉 �깉濡쒖슫 �뜲�씠�꽣瑜� �꽔�뒗�떎�뒗 �쓽誘�.
         elif idx == 0:
             new_node = Node(value)
             self.head.left_pointer = new_node
@@ -76,15 +76,15 @@ class DoublyLinkedList(object):
             new_node = Node(value)
 
             next_node = node.right_pointer
-            # 삽입하려는 idx 이전의 노드의 포인터를 새로운 노드로 설정
+            # �궫�엯�븯�젮�뒗 idx �씠�쟾�쓽 �끂�뱶�쓽 �룷�씤�꽣瑜� �깉濡쒖슫 �끂�뱶濡� �꽕�젙
             node.right_pointer = new_node
             new_node.left_pointer = node
-            # 현재 노드의 포인터를 삽입하려는 idx 이후의 노드로 설정
+            # �쁽�옱 �끂�뱶�쓽 �룷�씤�꽣瑜� �궫�엯�븯�젮�뒗 idx �씠�썑�쓽 �끂�뱶濡� �꽕�젙
             new_node.right_pointer = next_node
             next_node.left_pointer = new_node
             self.size += 1
 
-    # idx 위치의 노드를 삭제한다.
+    # idx �쐞移섏쓽 �끂�뱶瑜� �궘�젣�븳�떎.
     def delete(self, idx):
         if self.size == 0:
             print("Empty Linked List")
@@ -138,43 +138,43 @@ class DoublyLinkedList(object):
                 print(node.data)
                 node = node.left_pointer
 
-# Doubly Linked List 생성
+# Doubly Linked List �깮�꽦
 DLL = DoublyLinkedList()
 
 while(1):
-    command = input("명령어를 입력하세요(도움말: help 입력): ")
+    command = input("紐낅졊�뼱瑜� �엯�젰�븯�꽭�슂(�룄���留�: help �엯�젰): ")
 
     if command == 'help':
         print(" \
-            append: N개의 데이터 한 번에 추가\n \
-            insert: 특정 위치에 데이터 추가\n \
-            delete: 특정 위치의 데이터 삭제\n \
-            delete_all: 데이터 전부 삭제\n \
-            print: DLL에 있는 데이터 출력\n \
-            print_rev: DLL에 있는 데이터 역순으로 출력\n \
-            exit: 프로그램 종료\n \
+            append: N媛쒖쓽 �뜲�씠�꽣 �븳 踰덉뿉 異붽��\n \
+            insert: �듅�젙 �쐞移섏뿉 �뜲�씠�꽣 異붽��\n \
+            delete: �듅�젙 �쐞移섏쓽 �뜲�씠�꽣 �궘�젣\n \
+            delete_all: �뜲�씠�꽣 �쟾遺� �궘�젣\n \
+            print: DLL�뿉 �엳�뒗 �뜲�씠�꽣 異쒕젰\n \
+            print_rev: DLL�뿉 �엳�뒗 �뜲�씠�꽣 �뿭�닚�쑝濡� 異쒕젰\n \
+            exit: �봽濡쒓렇�옩 醫낅즺\n \
         ")
 
     elif command == 'append':
-        # Data 수 입력
-        data_num = int(input("추가할 데이터의 양을 입력하세요: "))
+        # Data �닔 �엯�젰
+        data_num = int(input("異붽���븷 �뜲�씠�꽣�쓽 �뼇�쓣 �엯�젰�븯�꽭�슂: "))
 
-        # Data 자동 생성
+        # Data �옄�룞 �깮�꽦
         data_list = []
         for idx in range(1, data_num+1):
             data = f'Data{idx}'
             data_list.append(data)
 
-        # DLL에 data 입력
+        # DLL�뿉 data �엯�젰
         for idx in range(data_num):
             DLL.append(data_list[idx])
 
     elif command == 'insert':
-        position, value = input("추가할 데이터의 위치와 값을 입력하세요: ").split()
+        position, value = input("異붽���븷 �뜲�씠�꽣�쓽 �쐞移섏�� 媛믪쓣 �엯�젰�븯�꽭�슂: ").split()
         DLL.insert(value, int(position))
 
     elif command == 'delete':
-        position = int(input("삭제할 데이터의 위치를 입력하세요: "))
+        position = int(input("�궘�젣�븷 �뜲�씠�꽣�쓽 �쐞移섎�� �엯�젰�븯�꽭�슂: "))
         DLL.delete(position)
 
     elif command == 'delete_all':
